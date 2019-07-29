@@ -18,7 +18,7 @@ public class Bus extends Thread {
 
     @Override
     public void run() {
-        System.out.println("Bus arrived!");
+        System.out.println("\nBus "+id+" arrived!");
         try {
             mutex.acquire();
             if (Rider.riders > 0){

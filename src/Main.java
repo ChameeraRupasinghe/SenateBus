@@ -1,9 +1,15 @@
+import java.util.Random;
 import java.util.concurrent.Semaphore;
 
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        System.out.println("---Senate Bus---\n");
+
+        Random random = new Random();
+
+        float busArriveMeanTime = 20*60f*1000;
+        float riderArrivalMeanTime = 30f*1000;
 
         Semaphore busSlots = new Semaphore(50);
         Semaphore allAboard = new Semaphore(1);
@@ -12,12 +18,5 @@ public class Main {
 
 
 
-        Rider r1 = new Rider(1, busSlots, allAboard, bus, mutex);
-        Rider r2 = new Rider(2, busSlots, allAboard, bus, mutex);
-        Bus b1 = new Bus(1, bus, allAboard, mutex);
-
-        b1.start();
-        r1.start();
-        r2.start();
     }
 }
