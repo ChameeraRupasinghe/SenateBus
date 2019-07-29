@@ -3,7 +3,7 @@ import java.util.concurrent.Semaphore;
 public class Rider extends Thread {
 
     private int id;
-    public static int riders = 50;
+    public static int riders = 0;
     private Semaphore busSlots, allAboard, bus, mutex;
 
     public Rider(int id, Semaphore busSlots, Semaphore allAboard, Semaphore bus, Semaphore mutex) {
@@ -26,6 +26,7 @@ public class Rider extends Thread {
             mutex.acquire();
             riders++;
             mutex.release();
+            bus.acquire();
             busSlots.release();
 
             boardBus();

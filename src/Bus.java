@@ -12,23 +12,29 @@ public class Bus extends Thread {
         this.allAboard = allAboard;
     }
 
-    public void depart() {
-        System.out.println("The bus is departed!");
-    }
 
     @Override
     public void run() {
-        System.out.println("\nBus "+id+" arrived!");
         try {
             mutex.acquire();
-            if (Rider.riders > 0){
+            arrive();
+            if (Rider.riders > 0) {
                 bus.release();
                 allAboard.acquire();
             }
             mutex.release();
+            depart();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
 
+    private void arrive(){
+        System.out.println("\nBus " + id + " arrived!");
+        System.out.println("Number of riders waiting: " + Rider.riders);
+    }
+
+    private void depart() {
+        System.out.println("Bus " + id + " is departed!\n");
     }
 }
